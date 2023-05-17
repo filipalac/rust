@@ -48,11 +48,21 @@ fn mark_complete(tasks: &mut Vec<Task>, position: usize) {
     }
 }
 
+fn print_list(tasks: &mut Vec<Task>) {
+    for task in tasks {
+        println!("[{}] {}",if task.completed {"x"} else {""},  task.task);
+    }
+}
+
 fn main() {
     let args: Vec<String> = env::args().collect();
 
     let mut tasks: Vec<Task> = Vec::new();
 
+   //push_task(&mut tasks, "ASDASDASDASD");
+   //push_task(&mut tasks, "ASDASDASDASD");
+    //mark_complete(&mut tasks, 1);
+   //print_list(&mut tasks);
 
     if args.len() == 2 && &args[1] == "list" {
         println!("Listy DPC");
