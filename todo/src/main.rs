@@ -15,6 +15,11 @@ The application should have a CLI interface, with subcommands for adding tasks, 
 use std::env;
 use std::process;
 
+struct Task {
+    task: String,
+    completed: bool,
+}
+
 
 
 fn parse_complete_num(arg: &str) -> u32 {
@@ -26,8 +31,19 @@ fn parse_complete_num(arg: &str) -> u32 {
     return complete;
 }
 
+fn push_task(tasks: &mut Vec<Task>, task: &str) {
+    let new_task = Task {
+        task: String::from(task),
+        completed: false,
+    };
+
+    tasks.push(new_task);
+}
+
 fn main() {
     let args: Vec<String> = env::args().collect();
+
+    let mut tasks: Vec<Task> = Vec::new();
 
 
     if args.len() == 2 && &args[1] == "list" {
@@ -41,7 +57,9 @@ fn main() {
 
 
     } else if  args.len() == 3 && &args[1] == "add" {
-        println!("add {}", &args[2]);
+        let add = &args[2];
+        println!("add {}", add);
+        push_task(&mut tasks, &args[2]);
 
 
     } else {
