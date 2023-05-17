@@ -86,4 +86,12 @@ fn main() {
     }
 
     //write_list_to_file(&tasks);
+    // I haven't managed in time to parse JSON from file
+    // I feel like I relied on chatGPT too much, I used is as a crutch
+    // for my absence of Rust knowledge, I think if I gained more knowledge
+    // on rust, this exercise would be a lot more fun, but at least I learned what I don't know.
+    // (that's true for the C exercise too, I realized my gaps in knowledge in daemons, and
+    // signals. Reading linux programming interface made me realize that I probably won't close
+    // this gap in few days.
+    // 
 }
