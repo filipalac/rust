@@ -16,7 +16,6 @@ struct Task {
 }
 
 
-
 fn parse_complete_num(arg: &str) -> usize {
     let complete: usize = match arg.parse() {
         Ok(parsed) => parsed,
@@ -25,6 +24,7 @@ fn parse_complete_num(arg: &str) -> usize {
 
     return complete;
 }
+
 
 fn push_task(tasks: &mut Vec<Task>, task: &str) {
     let new_task = Task {
@@ -35,6 +35,7 @@ fn push_task(tasks: &mut Vec<Task>, task: &str) {
     tasks.push(new_task);
 }
 
+
 fn mark_complete(tasks: &mut Vec<Task>, position: usize) {
     if let Some(task) = tasks.get_mut(position) {
         task.completed = true;
@@ -43,11 +44,13 @@ fn mark_complete(tasks: &mut Vec<Task>, position: usize) {
     }
 }
 
+
 fn print_list(tasks: &Vec<Task>) {
     for task in tasks {
         println!("[{}] {}",if task.completed {"x"} else {""},  task.task);
     }
 }
+
 
 fn write_list_to_file(tasks: &Vec<Task>) {
         let serialized = serde_json::to_string(&tasks).unwrap();
@@ -61,33 +64,26 @@ fn main() {
 
     let mut tasks: Vec<Task> = Vec::new();
 
-   push_task(&mut tasks, "ASDASDASDASD");
-   push_task(&mut tasks, "ASDASDASDASD");
-   mark_complete(&mut tasks, 1);
-   print_list(&tasks);
-   write_list_to_file(&tasks);
+
+    /*
+    push_task(&mut tasks, "ASDASDASDASD");
+    push_task(&mut tasks, "ASDASDASDASD");
+    mark_complete(&mut tasks, 1);
+    print_list(&tasks);
+    write_list_to_file(&tasks);
+    */
 
 
     if args.len() == 2 && &args[1] == "list" {
+        print_list(&tasks);
     } else if args.len() == 3 && &args[1] == "complete" {
-
         let complete = parse_complete_num(&args[2]);
-
         mark_complete(&mut tasks, complete);
-
-
-
     } else if  args.len() == 3 && &args[1] == "add" {
-        let add = &args[2];
         push_task(&mut tasks, &args[2]);
-
-
     } else {
         process::exit(0);
     }
 
-
-
-
-
+    //write_list_to_file(&tasks);
 }
