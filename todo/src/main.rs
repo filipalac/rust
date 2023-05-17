@@ -15,6 +15,17 @@ The application should have a CLI interface, with subcommands for adding tasks, 
 use std::env;
 use std::process;
 
+
+
+fn parse_complete_num(arg: &str) -> u32 {
+    let complete: u32 = match arg.parse() {
+        Ok(parsed) => parsed,
+        Err(_) => panic!("failed to parse number"),
+    };
+
+    return complete;
+}
+
 fn main() {
     let args: Vec<String> = env::args().collect();
 
@@ -23,8 +34,16 @@ fn main() {
         println!("Listy DPC");
     } else if args.len() == 3 && &args[1] == "complete" {
         println!("complete {}", &args[2]);
+
+        let complete = parse_complete_num(&args[2]);
+        println!("complete num {}", complete);
+
+
+
     } else if  args.len() == 3 && &args[1] == "add" {
         println!("add {}", &args[2]);
+
+
     } else {
         println!("Bad input, exiting");
         process::exit(0);
