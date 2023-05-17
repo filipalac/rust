@@ -22,8 +22,8 @@ struct Task {
 
 
 
-fn parse_complete_num(arg: &str) -> u32 {
-    let complete: u32 = match arg.parse() {
+fn parse_complete_num(arg: &str) -> usize {
+    let complete: usize = match arg.parse() {
         Ok(parsed) => parsed,
         Err(_) => panic!("failed to parse number"),
     };
@@ -40,6 +40,14 @@ fn push_task(tasks: &mut Vec<Task>, task: &str) {
     tasks.push(new_task);
 }
 
+fn mark_complete(tasks: &mut Vec<Task>, position: usize) {
+    if let Some(task) = tasks.get_mut(position) {
+        task.completed = true;
+    } else {
+        println!("Task at position {} does not exist.", position);
+    }
+}
+
 fn main() {
     let args: Vec<String> = env::args().collect();
 
@@ -49,10 +57,10 @@ fn main() {
     if args.len() == 2 && &args[1] == "list" {
         println!("Listy DPC");
     } else if args.len() == 3 && &args[1] == "complete" {
-        println!("complete {}", &args[2]);
 
         let complete = parse_complete_num(&args[2]);
-        println!("complete num {}", complete);
+
+        mark_complete(&mut tasks, complete);
 
 
 
